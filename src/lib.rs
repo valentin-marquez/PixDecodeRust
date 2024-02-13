@@ -32,14 +32,14 @@ fn decode(mut cx: FunctionContext) -> JsResult<JsObject> {
     let buffer = cx.argument::<JsBuffer>(0)?;
     let data = buffer.as_slice(&mut cx);
 
-    let pixels = image::load_from_memory(data)
-        .expect("Failed to load image")
-        .to_rgba8()
-        .into_raw();
-
-    let obj = Image::to_object(&mut cx, Image { pixels });
-
-    Ok(obj)
+    match image::load_from_memory(data) {
+        Ok(image_data) => {
+            let pixels = image_data.to_rgba8().into_raw();
+            let obj = Image::to_object(&mut cx, Image { pixels });
+            Ok(obj)
+        }
+        Err(e) => cx.throw_error(e.to_string()),
+    }
 }
 
 #[neon::main]
