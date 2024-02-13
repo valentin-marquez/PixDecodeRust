@@ -14,7 +14,11 @@ crate-type = ["cdylib"]
 
 [dependencies]
 palette_extract = "0.1.0"
-image = "0.24.8"
+zune-jpeg = "0.4.11"
+png = "0.17.11"
+gif = "0.13.1"
+zune-bmp = "0.4.0"
+libwebp = "0.1.2"
 
 [dependencies.neon]
 version = "1.0.0-alpha.4"

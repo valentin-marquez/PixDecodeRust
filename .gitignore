@@ -1,4 +1,5 @@
 # Logs
+*.node
 target/
 native/target
 native/index.node
